@@ -11,8 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name="br.marlon.mobile2you.feature.moviedetail.HomeActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen.NoActionBar">
+        <activity android:name=".feature.moviedetail.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

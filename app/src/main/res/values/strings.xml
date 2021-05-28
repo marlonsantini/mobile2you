@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mobile2you</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -10,12 +10,12 @@ private const val APIKEY = "b62492831ba70a09a75a975f23e85216"
 
 interface MovieClient {
 
-    @GET("12")
+    @GET("103")
     fun getMovieDetail(
         @Query("api_key") apiKey: String = APIKEY
     ): Call<Movie>
 
-    @GET("12/similar")
+    @GET("103/similar")
     fun getMovieSimilar(
         @Query("api_key") apiKey: String = APIKEY
     ): Call<MovieListSimilar>

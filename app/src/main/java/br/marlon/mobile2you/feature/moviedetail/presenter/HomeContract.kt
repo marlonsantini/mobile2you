@@ -16,7 +16,7 @@ interface HomeContract {
     }
 
     interface Presenter {
-        fun carregarFilme()
-        fun carregarListaFilmeSimilar()
+        fun loadMovies()
+        fun loadListMovieSimilar()
     }
 }

@@ -7,40 +7,38 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 private const val BASE_URL_IMAGE_W500 = "https://image.tmdb.org/t/p/w500/"
 private const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/original/"
 
 
-class HomePresenter : HomeContract.Presenter {
+class HomePresenter(private val contractView: HomeContract.View) : HomeContract.Presenter {
 
-    lateinit var view: HomeContract.View
-
-    override fun carregarFilme() {
-        view.showLoadingDialog()
+    override fun loadMovies() {
+        contractView.showLoadingDialog()
         RetrofitInitializer.instance.getMovieDetail()
             .enqueue(object : Callback<Movie> {
                 override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
                     if (response.isSuccessful) {
-                        // Body não nulo
                         response.body()?.let {
                             val newMovie = it.copy(
-                                backdropPath = BASE_URL_IMAGE_W500 + it.backdropPath,
+                                backdropPath = BASE_URL_IMAGE + it.backdropPath,
                                 popularity = it.popularity + " %"
                             )
-                            view.movieDetail(newMovie)
-                            view.hideLoadingDialog()
+                            contractView.movieDetail(newMovie)
+                            contractView.hideLoadingDialog()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<Movie>, t: Throwable) {
-                    view.showError(t.message ?: "")
-                    view.hideLoadingDialog()
+                    contractView.showError(t.message ?: "")
+                    contractView.hideLoadingDialog()
                 }
             })
     }
 
-    override fun carregarListaFilmeSimilar() {
+    override fun loadListMovieSimilar() {
         RetrofitInitializer.instance.getMovieSimilar()
             .enqueue(object : Callback<MovieListSimilar> {
                 override fun onResponse(
@@ -54,17 +52,14 @@ class HomePresenter : HomeContract.Presenter {
                                     posterPath = BASE_URL_IMAGE_W500 + movieItem.posterPath
                                 )
                             }
-                            view.movieList(newListMovie)
-
+                            contractView.movieList(newListMovie)
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<MovieListSimilar>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    contractView.showError(t.message ?: "")
                 }
             })
     }
-
-
 }

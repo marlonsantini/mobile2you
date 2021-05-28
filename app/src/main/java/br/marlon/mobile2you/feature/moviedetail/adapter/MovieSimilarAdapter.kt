@@ -27,7 +27,6 @@ class MovieSimilarAdapter(private val movies: List<MovieSimilarItem>) :
                 binding.tvTitle.text = title
                 binding.tvYear.text = releaseDate
                 binding.imgMovieSimilar.load(posterPath)
-
             }
         }
     }
